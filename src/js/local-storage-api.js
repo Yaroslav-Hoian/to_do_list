@@ -1,6 +1,4 @@
 const localKey = "my_tasks";
-const localThemeKey = "theme";
-const localInputKey = "input_task";
 
 export function getTaskFromStorage() {
     const data = JSON.parse(localStorage.getItem(localKey));
@@ -24,6 +22,8 @@ export function deleteTaskFromStorage(id) {
     localStorage.setItem(localKey, JSON.stringify(filterArrTask));
 }
 
+const localThemeKey = "theme";
+
 export function getThemeFromStorage() {
     const currentTheme = JSON.parse(localStorage.getItem(localThemeKey));
     return currentTheme;
@@ -32,6 +32,8 @@ export function getThemeFromStorage() {
 export function setThemeToStorage(theme) {
     localStorage.setItem(localThemeKey, JSON.stringify(theme))
 }
+
+const localInputKey = "input_task";
 
 export function getInputFromStorage() {
     const inputData = JSON.parse(localStorage.getItem(localInputKey));
@@ -49,4 +51,21 @@ export function saveInputToStorage(task) {
 
 export function clearInputStorage() {
     localStorage.removeItem(localInputKey);
+}
+
+const localCompleteTaskCounterKey = "complete_tasks" 
+
+export function getCompleteTaskFromStorage() {
+    const dataComplete = JSON.parse(localStorage.getItem(localCompleteTaskCounterKey));
+    return dataComplete;
+}
+
+export function initCompleteTaskToStorage() {
+    const completeData = getCompleteTaskFromStorage() ?? 0;
+    localStorage.setItem(localCompleteTaskCounterKey, JSON.stringify(completeData))
+}
+
+export function saveCompleteTaskToStorage() {
+    const count = getCompleteTaskFromStorage() + 1;
+    localStorage.setItem(localCompleteTaskCounterKey, JSON.stringify(count))
 }

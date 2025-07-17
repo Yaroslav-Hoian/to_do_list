@@ -3,8 +3,9 @@ import "izitoast/dist/css/iziToast.min.css";
 import { refs } from "./refs";
 import { createTask } from "./markup-tasks";
 import { nanoid } from "nanoid";
-import { saveTaskToStorage, deleteTaskFromStorage, clearInputStorage } from "./local-storage-api";
+import { saveTaskToStorage, deleteTaskFromStorage, clearInputStorage, saveCompleteTaskToStorage } from "./local-storage-api";
 import { emptyInput, isDuplicate } from "./input-aydit";
+import { updateTotalCountTaskToDo, getCompleteTaskToComplete } from "./counter-task";
 
 export function addTask(ev) {
     ev.preventDefault()
@@ -12,9 +13,12 @@ export function addTask(ev) {
     const title = ev.target.taskName.value.trim();
     const descr = ev.target.taskDescription.value.trim();
 
-    emptyInput(title, descr);
+    if (emptyInput(title, descr)) {
+        return;
+    }
+
     if (isDuplicate(title, descr)) {
-        return refs.form.reset();
+        return;
     };
 
     const newTask = {
@@ -32,7 +36,9 @@ export function addTask(ev) {
             message: "Твій task успішно додано",
             position: "bottomCenter"
         })
-
+    
+    updateTotalCountTaskToDo();
+    
     refs.form.reset();
 
     clearInputStorage();
@@ -46,7 +52,9 @@ export function deleteTask(ev) {
         deleteTaskFromStorage(taskId)
         taskItem.remove()
         
-        // completedTasksCount += 1;
+        updateTotalCountTaskToDo();
+        saveCompleteTaskToStorage();
+        getCompleteTaskToComplete();
         iziToast.success({
             title: "+1 до 'Виконано'",
             message: "Твій task успішно видалено",

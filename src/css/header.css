@@ -44,3 +44,17 @@
   background-color: rgb(245, 245, 245);
   transition: all 250ms ease-in-out;
 }
+
+body.theme-dark .header-form-btn {
+  background: linear-gradient(45deg, #ff6b0a, #ff4500);
+  color: white;
+}
+
+body.theme-light .header-form-btn {
+  background: rgb(245, 245, 245);
+  color: #333;
+}
+
+.header-form-btn:hover {
+  transform: scale(1.1);
+}

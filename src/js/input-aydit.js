@@ -2,14 +2,17 @@ import { refs } from "./refs";
 import iziToast from "izitoast";
 
 export function emptyInput(title, descr) {
-    if (title === '' || descr === '') {
+    const isEmpty = title === '' || descr === '';
+
+    if (isEmpty) {
         iziToast.warning({
             title: "Порожньо",
             message: "Введіть свій task",
             position: "bottomCenter"
         })
-        return refs.form.reset();
     }
+
+    return isEmpty;
 }
 
 export function isDuplicate(title, descr) {

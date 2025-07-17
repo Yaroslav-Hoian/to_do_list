@@ -111,3 +111,27 @@ body.theme-light .theme-toggle-button {
 .theme-toggle-button:hover {
   transform: scale(1.1);
 }
+
+.counter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.counter-box:hover {
+  transform: scale(1.1);
+}
+
+body.theme-dark .counter-box {
+  background: linear-gradient(45deg, #ff6b0a, #ff4500);
+  color: white;
+}
+
+body.theme-light .counter-box {
+  background: #ffffff;
+  color: #333;
+}
